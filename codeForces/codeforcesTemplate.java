@@ -50,37 +50,102 @@ public class codeforcesTemplate {
         return sum;
     }
 
-    public static void main(String[] args) {
-        int t = sc.nextInt();
+    public static long lowerBound(long[] nums, long value) {
+        int low = 0;
+        int high = nums.length;
 
-        while (t-- > 0) {
-            solve();
+        while (low < high) {
+            int mid = (low + high) / 2;
+            if (nums[mid] < value) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+        return low;
+    }
+
+    public static int upperBound(int[] nums, long value) {
+        int low = 0;
+        int high = nums.length;
+
+        while (low < high) {
+            int mid = (low + high) / 2;
+            if (nums[mid] <= value) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+        return low;
+    }
+
+    public static long findSum(long[] arr) {
+        long sum = 0;
+        for (long i : arr) {
+            sum += i;
+        }
+        return sum;
+    }
+
+    //////////////////////////// MAIN FUNCTION ////////////////////////////
+
+    public static void main(String[] args) {
+        int n = sc.nextInt();
+        long[] arr = takeArrayInput(n);
+        long sum = findSum(arr);
+
+        Arrays.sort(arr);
+        long m = sc.nextLong();
+        while (m-- > 0) {
+            long x = sc.nextLong();
+            long y = sc.nextLong();
+
+            long coin = 0;
+            long s = 0;
+            long c = 0;
+
+            long itr = lowerBound(arr, x);
+            long ans;
+
+            if (itr == arr.length) {
+                ans = arr[n - 1];
+                if (ans < x) {
+                    coin = x - ans;
+                }
+                s = sum - ans;
+                if (s < y) {
+                    coin += y - s;
+                }
+            } else {
+                ans = arr[(int)itr];
+                if (ans < x) {
+                    coin = x - ans;
+                }
+                s = sum - ans;
+                if (s < y) {
+                    coin += y - s;
+                }
+                if (itr != 0) {
+                    ans = arr[(int)(itr - 1)];
+                    if (ans < x) {
+                        c = x - ans;
+                    }
+                    s = sum - ans;
+                    if (s < y) {
+                        c += y - s;
+                    }
+                    coin = Math.min(coin, c);
+                }
+            }
+            System.out.println(coin);
+
         }
     }
 
     public static void solve() {
-        int n = sc.nextInt();
-        String s = sc.next();
-
-        long underScore = 0;
-        long dash = 0;
-        for (int i = 0; i < n; i++) {
-            if (s.charAt(i) == '-') {
-                dash++;
-            } else {
-                underScore++;
-            }
-        }
-        if (dash < 2 || underScore < 1) {
-            System.out.println(0);
-        } else {
-            if (dash % 2 == 0) {
-                System.out.println((underScore * (dash / 2) * (dash / 2)));
-            }else{
-                System.out.println((underScore * ((dash / 2)+1) * (dash / 2)));
-            }
-        }
     }
+        
 
 }
 /*

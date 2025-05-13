@@ -1,0 +1,9 @@
+Trick no 1:- 
+whenever there is problem like pick 2 index and reduce the element on that index to 0 then and will be 
+if (Max element is greater then sum of other elements in array){
+    then max element is ans
+}else{
+    floor of sum of all elements/2 is ans
+}
+
+Trick no 2:-

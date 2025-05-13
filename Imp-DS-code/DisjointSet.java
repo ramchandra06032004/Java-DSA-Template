@@ -1,4 +1,4 @@
-public class DisjointSet {
+class DisjointSet {
     public int[] size;
     public int[] parent;
     public int components;

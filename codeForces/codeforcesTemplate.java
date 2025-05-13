@@ -1,9 +1,7 @@
 
-import java.util.ArrayList;
+
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.PriorityQueue;
+
 import java.util.Scanner;
 
 public class codeforcesTemplate {
@@ -91,64 +89,33 @@ public class codeforcesTemplate {
     //////////////////////////// MAIN FUNCTION ////////////////////////////
 
     public static void main(String[] args) {
-        int n = sc.nextInt();
-        long[] arr = takeArrayInput(n);
-        long sum = findSum(arr);
-
-        Arrays.sort(arr);
-        long m = sc.nextLong();
-        while (m-- > 0) {
-            long x = sc.nextLong();
-            long y = sc.nextLong();
-
-            long coin = 0;
-            long s = 0;
-            long c = 0;
-
-            long itr = lowerBound(arr, x);
-            long ans;
-
-            if (itr == arr.length) {
-                ans = arr[n - 1];
-                if (ans < x) {
-                    coin = x - ans;
-                }
-                s = sum - ans;
-                if (s < y) {
-                    coin += y - s;
-                }
-            } else {
-                ans = arr[(int)itr];
-                if (ans < x) {
-                    coin = x - ans;
-                }
-                s = sum - ans;
-                if (s < y) {
-                    coin += y - s;
-                }
-                if (itr != 0) {
-                    ans = arr[(int)(itr - 1)];
-                    if (ans < x) {
-                        c = x - ans;
-                    }
-                    s = sum - ans;
-                    if (s < y) {
-                        c += y - s;
-                    }
-                    coin = Math.min(coin, c);
-                }
-            }
-            System.out.println(coin);
-
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            solve();
         }
     }
 
     public static void solve() {
+        int n=sc.nextInt();
+        int k=sc.nextInt();
+        if (k%2==1) {
+            for(int i=0;i<n-1;i++){
+                System.out.print(n+" ");
+            }
+            System.out.print(n-1);
+        }else{
+            int[] arr=new int[n];
+            Arrays.fill(arr, n);
+            arr[n-1]--;
+            for(int i=0 ; i<n ; i++){
+                System.out.print(arr[i]+" ");
+            }
+        }
     }
         
 
 }
 /*
- * 1 6 1
- * 2 4 1 1 1 1
+1 4
+0 0 1 1
  */
